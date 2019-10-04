@@ -147,84 +147,181 @@ Garmony3='Am F C E'
 path = 'Tracks' 
 if not os.path.exists(path):
     os.makedirs(path)
+print('Choose your language:')
+print('1 - English')
+print('2 - Russian')
+lang=int(input())
+if lang!=1 and lang!=2:
+    print("Uh... it'll be english anyway")
+    lang=1
 while settingsflag==0:
-    print("Выбери гармонию:")
-    print(f"1 - {Garmony1}")
-    print(f"2 - {Garmony2}")
-    print(f"3 - {Garmony3}")
-    print('50 - Случайная генерация квадрата + зацикливание')
-    print('100 - Случайная генерация квадрата без его дальнейшего зацикливания. Общие тоника (I аккорд) и доминанта (IV аккорд).')
-    print("0 - Настройки")
-    Ngarmony=int(input())
-    if Ngarmony==0:
-        settingsflag1=0
-        while settingsflag1==0:
-            print("1 - Изменить темп")
-            print("2 - Изменить длительность (количество тактов, кратно 16)")
-            print("3 - Изменить вероятности выпадения TSD")
-            print("4 - Изменить инструмент в гармонии")
-            print("5 - Изменить тональность")
-            print("6 - Закончить настройку")
-            choice=int(input())
-            if choice==1:
-                print(f"Задайте новое значение темпа, текущее значение - {tempo}")
-                tempo=int(input())
-                print(f"Новое значение - {tempo}")
-            elif choice==2:
-                print(f"Задайте новую длительность (рекомендуется кратно 16), текущее значение - {songdur}")
-                songdur=int(input())
-            elif choice==3:
-                print(f"Текущая вероятность выпадения I ст. - {tonic}%, IV ст. - {subd}%, V ст. - {domin}%")
-                print(f"Никаких проверок, на свой страх и риск введите новые значения выпадения в соовтетствующем порядке (без значка %)")
-                tonic=int(input())
-                subd=int(input())
-                domin=int(input())
-                print(f"Текущая вероятность выпадения I ст. - {tonic}%, IV ст. - {subd}%, V ст. - {domin}%")
-            elif choice==4:
-                print(f"Введите число от 0 до 127. По умолчанию - 0 (acoustic piano)")
-                instrumentgarm=int(input())
-            elif choice==5:
-                print('По умолчанию - До. Укажите смещение в полутонах, например "5" - на 5 полутонов выше, либо "-5" - на 5 полутонов ниже')
-                ton=int(input())
-                for i in range(len(degrees)):
-                    degrees[i]=degrees[i]+ton
-            elif choice==6:
-                settingsflag1=1
-    else:
-        break
-print('Выбери ритм аккомпанимента')
-print('1 - Один аккорд на такт')
-print('2 - Два одинаковых аккорда на такт')
-#print('3 - Два различных аакорда на такт')
-ritm=int(input())
-if Ngarmony==2:
-    print(f"Гармония: {Garmony2}. Выбери тонику (целое число от 1 до 8)")
-elif Ngarmony==1:
-    print(f"Гармония: {Garmony1}. Выбери тонику (целое число от 1 до 8)")
-elif Ngarmony==3:
-    print(f"Гармония: {Garmony3}. Выбери тонику (целое число от 1 до 8)")
-print(f"1: C - До-мажор")
-print(f"2: D - Ре-дорийский")
-print(f"3: E - Ми-фригийский")
-print(f"4: F - Фа-лидийский")
-print(f"5: G - Соль-микролидийский")
-print(f"6: A - Ля-минор")
-print(f"7: B - Си-локрийский")
-print(f"8: Сгенерировать все вышеперечисленное")
-tonicchose=int(input())
-if tonicchose==8:
-    print('Можно повышать или понижать результат на полтона с каждой итерацией. Интересует?')
-    print('1 - Нет, спасибо')
-    print('2 - Повышай')
-    print('3 - Понижай')
-    sdvig=int(input())
+    if lang==2:
+        print("Выбери гармонию:")
+        print(f"1 - {Garmony1}")
+        print(f"2 - {Garmony2}")
+        print(f"3 - {Garmony3}")
+        print('50 - Случайная генерация квадрата + зацикливание')
+        print('100 - Случайная генерация квадрата без его дальнейшего зацикливания. Общие тоника (I аккорд) и доминанта (IV аккорд).')
+        print('200 - Просто попробовать пример')
+        print("0 - Настройки")
+        Ngarmony=int(input())
+        if Ngarmony==0:
+            settingsflag1=0
+            while settingsflag1==0:
+                print("1 - Изменить темп")
+                print("2 - Изменить длительность (количество тактов, кратно 16)")
+                print("3 - Изменить вероятности выпадения TSD")
+                print("4 - Изменить инструмент в гармонии")
+                print("5 - Изменить тональность")
+                print("6 - Закончить настройку")
+                choice=int(input())
+                if choice==1:
+                    print(f"Задайте новое значение темпа, текущее значение - {tempo}")
+                    tempo=int(input())
+                    print(f"Новое значение - {tempo}")
+                elif choice==2:
+                    print(f"Задайте новую длительность (рекомендуется кратно 16), текущее значение - {songdur}")
+                    songdur=int(input())
+                elif choice==3:
+                    print(f"Текущая вероятность выпадения I ст. - {tonic}%, IV ст. - {subd}%, V ст. - {domin}%")
+                    print(f"Никаких проверок, на свой страх и риск введите новые значения выпадения в соовтетствующем порядке (без значка %)")
+                    tonic=int(input())
+                    subd=int(input())
+                    domin=int(input())
+                    print(f"Текущая вероятность выпадения I ст. - {tonic}%, IV ст. - {subd}%, V ст. - {domin}%")
+                elif choice==4:
+                    print(f"Введите число от 0 до 127. По умолчанию - 0 (acoustic piano)")
+                    instrumentgarm=int(input())
+                elif choice==5:
+                    print('По умолчанию - До. Укажите смещение в полутонах, например "5" - на 5 полутонов выше, либо "-5" - на 5 полутонов ниже')
+                    ton=int(input())
+                    for i in range(len(degrees)):
+                        degrees[i]=degrees[i]+ton
+                elif choice==6:
+                    settingsflag1=1
+        else:
+            break
+    if lang==1:
+        print("Generated tracks will be created in the same directory as script. You will find it in 'Tracks' folder")
+        print("Choose the harmony:")
+        print(f"1 - {Garmony1}")
+        print(f"2 - {Garmony2}")
+        print(f"3 - {Garmony3}")
+        print('50 - Random generation of chord square and cycle it')
+        print('100 - Random generation of chords without any cycling. Have common chords: tonic (1st chord of square) and dominant (4th chord of square).')
+        print('200 - Just try some example.')
+        print("0 - Settings")
+        Ngarmony=int(input())
+        if Ngarmony==0:
+            settingsflag1=0
+            while settingsflag1==0:
+                print("1 - Change tempo")
+                print("2 - Change song duration (number of tact, multiple to 16)")
+                print("3 - Change probability of getting TSD")
+                print("4 - Change instrument in harmony")
+                print("5 - Change tone")
+                print("6 - Done and go ahead")
+                choice=int(input())
+                if choice==1:
+                    print(f"Set new tempo, Current value - {tempo}")
+                    tempo=int(input())
+                    print(f"New value - {tempo}")
+                elif choice==2:
+                    print(f"Set new duration (it's highly recomended to be multiple to 16), current value - {songdur}")
+                    songdur=int(input())
+                elif choice==3:
+                    print(f"Current probablity to get I (tonic) - {tonic}%, IV (subdominant) - {subd}%, V (dominant) - {domin}%")
+                    print(f"There is no type or value checking, do it as you want. Tonic probabilty checks first, if you set e.g. 20000 then there is always be tonic, it's like 100%. Set new values in order pressing Enter everytime (without '%')")
+                    tonic=int(input())
+                    subd=int(input())
+                    domin=int(input())
+                    print(f"Current probability I - {tonic}%, IV - {subd}%, V - {domin}%")
+                elif choice==4:
+                    print(f"Type the number from 0 to 127. Default - 0 (acoustic piano). And actually it's the best choice")
+                    instrumentgarm=int(input())
+                elif choice==5:
+                    print('Default - C. Set the bias in semitones, e.g. "5" - 5 semitones higher, or "-5" - 5 semitones lower')
+                    ton=int(input())
+                    for i in range(len(degrees)):
+                        degrees[i]=degrees[i]+ton
+                elif choice==6:
+                    settingsflag1=1
+        else:
+            break
+if Ngarmony!=200:
+    if lang==2:
+        print('Выбери ритм аккомпанимента')
+        print('1 - Один аккорд на такт')
+        print('2 - Два одинаковых аккорда на такт')
+    if lang==1:
+        print('Choose rythm of harmony. Have only 2 right now, maybe soon')
+        print('1 - 1 chord in tact')
+        print('2 - 2 same chords in tact')
+    #print('3 - Два различных аакорда на такт')
+    ritm=int(input())
+    if lang==2:
+        if Ngarmony==2:
+            print(f"Гармония: {Garmony2}. Выбери тонику (целое число от 1 до 8)")
+        elif Ngarmony==1:
+            print(f"Гармония: {Garmony1}. Выбери тонику (целое число от 1 до 8)")
+        elif Ngarmony==3:
+            print(f"Гармония: {Garmony3}. Выбери тонику (целое число от 1 до 8)")
+        elif Ngarmony==50:
+            print(f"Гармония: Случайная с зацикливанием. Выбери тонику (целое число от 1 до 8)")
+        elif Ngarmony==100:
+            print(f"Гармония: Случайная каждый квадрат. Выбери тонику (целое число от 1 до 8)")
+        print(f"1: C - До-мажор")
+        print(f"2: D - Ре-дорийский")
+        print(f"3: E - Ми-фригийский")
+        print(f"4: F - Фа-лидийский")
+        print(f"5: G - Соль-микролидийский")
+        print(f"6: A - Ля-минор")
+        print(f"7: B - Си-локрийский")
+        print(f"8: Сгенерировать все вышеперечисленное")
+    if lang==1:
+        if Ngarmony==2:
+            print(f"Harmony: {Garmony2}. Chose the tonic (integer from 1 to 8)")
+        elif Ngarmony==1:
+            print(f"Harmony: {Garmony1}. Chose the tonic (integer from 1 to 8)")
+        elif Ngarmony==3:
+            print(f"Harmony: {Garmony3}. Chose the tonic (integer from 1 to 8)")
+        elif Ngarmony==50:
+            print(f"Harmony: Random with cycle. Chose the tonic (integer from 1 to 8)")
+        elif Ngarmony==100:
+            print(f"Harmony: Random every square. Chose the tonic (integer from 1 to 8)")
+        print(f"1: C-major")
+        print(f"2: D-dorian")
+        print(f"3: E-phrygian")
+        print(f"4: F-lydian")
+        print(f"5: G-mixolydian")
+        print(f"6: A-minor")
+        print(f"7: B-locrian")
+        print(f"8: Generate all the stuff")
+        
+    tonicchose=int(input())
+    if tonicchose==8:
+        if lang==2:
+            print('Можно повышать или понижать результат на полтона с каждой итерацией. Интересует?')
+            print('1 - Нет, спасибо')
+            print('2 - Повышай')
+            print('3 - Понижай')
+        if lang==1:
+            print('I can generate lower and higher to semitone with every iteration, do you instrested in?')
+            print('1 - No, thanks')
+            print('2 - Make it higher')
+            print('3 - Make it lower')
+        sdvig=int(input())
+elif Ngarmony==200:
+    ritm=2
+    tonicchose=8
+    sdvig=3      
+    Ngarmony=1
 if type(tonicchose) is int:
     j=0
     flag=1
     tonicnote=0
     tonicnote1=degrees[:len(degrees)-2]
     print(tonicnote1)
-    input()
     while j<7:
         if tonicchose!=8:
             j=tonicchose-1
@@ -246,16 +343,19 @@ if type(tonicchose) is int:
         if tonicnote1[j]==tonicnote1[3]:
             subdnote=tonicnote1[j]+6
             dominnote=tonicnote1[j]+7
-            print("Это лидийский лад, поэтому я поменял кварту на тритон для субдоминанты")
+            #print("Это лидийский лад, поэтому я поменял кварту на тритон для субдоминанты")
         elif tonicnote1[j]==tonicnote1[6]:
             subdnote=tonicnote1[j]+5
             dominnote=tonicnote1[j]+6
-            print("Это локрийский лад, поэтому я поменял квинту на тритон для доминанты")
+            #print("Это локрийский лад, поэтому я поменял квинту на тритон для доминанты")
         else:
             subdnote=tonicnote1[j]+5
             dominnote=tonicnote1[j]+7
         #prints.append(f"Тоника: {notename(tonicnote1[j])}, Субдоминанта: {notename(subdnote)}, Доминанта: {notename(dominnote)}")
-        print(f"Тоника: {notename(tonicnote1[j])}, Субдоминанта: {notename(subdnote)}, Доминанта: {notename(dominnote)}")
+        if lang==2:
+            print(f"Тоника: {notename(tonicnote1[j])}, Субдоминанта: {notename(subdnote)}, Доминанта: {notename(dominnote)}")
+        if lang==1:
+            print(f"Tonic: {notename(tonicnote1[j])}, Subdominant: {notename(subdnote)}, Dominant: {notename(dominnote)}")
         MyMIDI = MIDIFile(numTracks=3)
         MyMIDI.addTempo(track, time, tempo)
         MyMIDI.addTempo(track1, time, tempo)
@@ -568,8 +668,8 @@ if type(tonicchose) is int:
                     ran=rr.randint(0,len(durtsd)-1)
                     time=time+lastdur
                    # MyMIDI.addNote(track, channel, degrees[0], time, duroth[randduroth], 100)
-                    print(f"Note, {time}, pause, Длительность: {durtsd[ran]}, Предыдущая длительность: {lastdur}, {randtonic}")
-                    prints.append(f"Note,{time}, pause, Длительность: {durtsd[ran]}, Предыдущая длительность: {lastdur}, {randtonic}")
+                    print(f"Note, {time}, pause, Duration: {durtsd[ran]}, Last duration: {lastdur}, rand: {randtonic}")
+                    prints.append(f"Note,{time}, pause, Duration: {durtsd[ran]}, Last duration: {lastdur}")
 #                    lastdur=durtsd[randdur]
                     lastdur=durtsd[ran]                    
                 l=0
@@ -581,8 +681,8 @@ if type(tonicchose) is int:
                 time=time+lastdur
                 ran=rr.randint(0,len(durtsd)-1)
                 MyMIDI.addNote(track, channel, note, time, durtsd[ran], rr.randint(90,100))
-                print(f"Note, {time}, Нота: {notename(note)}, Длительность: {durtsd[ran]}, Предыдущая длительность: {lastdur}, {randtonic}")
-                prints.append(f"Note,{time}, Нота: {notename(note)}, Длительность: {durtsd[ran]}, Предыдущая длительность: {lastdur}, {randtonic}")
+                print(f"Note, {time}, Note: {notename(note)}, Duration: {durtsd[ran]}, Last duration: {lastdur}, rand: {randtonic}")
+                prints.append(f"Note,{time}, Note: {notename(note)}, Duration: {durtsd[ran]}, Last duration: {lastdur}")
 #                    lastdur=durtsd[randdur]
                 lastdur=durtsd[ran]
                 l=1              
@@ -592,8 +692,8 @@ if type(tonicchose) is int:
                     time=time+lastdur
                     ran=rr.randint(0,len(durtsd)-1)
                     MyMIDI.addNote(track, channel, note, time, durtsd[ran], rr.randint(80,95))
-                    print(f"Note, {time}, Нота: {notename(note)}, Длительность: {durtsd[ran]}, Предыдущая длительность: {lastdur}, {randtonic}")
-                    prints.append(f"Note,{time}, Нота: {notename(note)}, Длительность: {durtsd[ran]}, Предыдущая длительность: {lastdur}, {randtonic}")
+                    print(f"Note, {time}, Note: {notename(note)}, Duration: {durtsd[ran]}, Last duration: {lastdur}, {randtonic}")
+                    prints.append(f"Note,{time}, Note: {notename(note)}, Duration: {durtsd[ran]}, Last duration: {lastdur}")
                     lastdur=durtsd[ran]
                     l=1
                     
@@ -604,8 +704,8 @@ if type(tonicchose) is int:
                         time=time+lastdur
                         ran=rr.randint(0,len(durtsd)-1)
                         MyMIDI.addNote(track, channel, note, time, durtsd[ran], rr.randint(80,95))
-                        print(f"Note, {time}, Нота: {notename(note)}, Длительность: {durtsd[ran]}, Предыдущая длительность: {lastdur}, {randtonic}")
-                        prints.append(f"Note,{time}, Нота: {notename(note)}, Длительность: {durtsd[ran]}, Предыдущая длительность: {lastdur}, {randtonic}")
+                        print(f"Note, {time}, Note: {notename(note)}, Duration: {durtsd[ran]}, Last duration: {lastdur}, {randtonic}")
+                        prints.append(f"Note,{time}, Note: {notename(note)}, Duration: {durtsd[ran]}, Last duration: {lastdur}")
                         lastdur=durtsd[ran]
                         
                     else:
@@ -613,8 +713,8 @@ if type(tonicchose) is int:
                         while degrees[randnote]==tonicnote1[j] or degrees[randnote]==subdnote or degrees[randnote]==dominnote:
                             randnote=rr.randint(0,len(degrees)-1)
                         MyMIDI.addNote(track, channel, degrees[randnote], time, duroth[randduroth], rr.randint(70,90)) 
-                        print(f"Note, {time}, Нота: {notename(degrees[randnote])}, Длительность: {duroth[randduroth]}, Предыдущая длительность: {lastdur}, {randtonic}")
-                        prints.append(f"Note,{time}, Нота: {notename(degrees[randnote])}, Длительность: {duroth[randduroth]}, Предыдущая длительность: {lastdur}, {randtonic}")
+                        print(f"Note, {time}, Note: {notename(degrees[randnote])}, Duration: {duroth[randduroth]}, Last duration: {lastdur}, {randtonic}")
+                        prints.append(f"Note,{time}, Note: {notename(degrees[randnote])}, Duration: {duroth[randduroth]}, Last duration: {lastdur}")
                         lastdur=duroth[randduroth]
                                   
             i=i+1
@@ -706,6 +806,10 @@ if type(tonicchose) is int:
                     textfile.write('\n')
             prints=[]
         j=j+1
-        print()
         if tonicchose!=8:
             break
+if lang==2:
+    print('Не забудь проверить папку Tracks')
+if lang==1:
+    print('Dont forget to check Tracks folder out threre')
+input()
